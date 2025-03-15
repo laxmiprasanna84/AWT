@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Hello {{name}}!</h1>
+
+  <app-child></app-child>
+
+  <button (click)="toggleTable()">Enter</button>
+
+  <table *ngIf="showTable" border="1">
+  
+    <tr>
+      <td>ID</td>
+      <td>NAME</td>
+      <td>AGE</td>
+    </tr>
+    <ng-container *ngFor="let student of students">
+      <!-- <tr *ngIf="student.age > 19"> -->
+      <tr>
+        <td>{{student.id}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.age}}</td>
+        <td><button (click)="deleteStudent(student.id)">Delete</button></td>
+      </tr>
+
+    </ng-container>
+  </table>
+
+</body>
+</html>
