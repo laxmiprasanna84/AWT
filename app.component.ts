@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'demo';
-  name = 'cvr';
-  showTable:boolean = false;
+  call = 'cvr';
+  showTable:boolean = true;
 
   students=[
     {id:1,name:"sri",age:20},
@@ -23,9 +23,25 @@ export class AppComponent {
     console.log("hello") 
   }
 
-  deleteStudent(id: number) {
+  selectedStudent:any
+
+  deleteStudent(id: any) {
     this.students = this.students.filter(student => student.id !== id);
     console.log('Deleted student:',id)
   }
   
+  addStudent(id:any, name:any, age:any){
+    this.students.push({id:id.value,name:name.value,age:age.value})
+    console.log("student added: ",)
+  }
+
+  editStudent(student: any){
+    this.selectedStudent={...student};
+  }
+
+  // updateStudent(){
+  //   const index= this.students.findIndex(student => student.id==this.selectedStudent)
+  //   console.log(index)
+  //   this.students[index]=this.selectedStudent
+  // }
 } 
