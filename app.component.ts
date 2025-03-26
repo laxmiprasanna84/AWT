@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ApiStudentService } from './api-student.service';
+import { StudentService } from './student.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,38 +13,34 @@ export class AppComponent {
   title = 'demo';
   call = 'cvr';
   showTable:boolean = true;
-
-  students=[
-    {id:1,name:"sri",age:20},
-    {id:2,name:"sai",age:21},
-    {id:3,name:"sam",age:19},
-    {id:4,name:"ram",age:21} 
-  ]  
+  students: any;
 
   toggleTable() {
     this.showTable = !this.showTable;
     console.log("hello") 
   }
 
-  selectedStudent:any
+  constructor(private studentService:StudentService){}
 
-  deleteStudent(id: any) {
-    this.students = this.students.filter(student => student.id !== id);
-    console.log('Deleted student:',id)
+  ngOnInit(){
+   this.fetchStudents()
+  }
+
+  fetchStudents(){
+    this.students=this.studentService.getStudents();
   }
   
-  addStudent(id:any, name:any, age:any){
-    this.students.push({id:id.value,name:name.value,age:age.value})
-    console.log("student added: ",)
+  deleteStudent(id:any){
+    this.studentService.deleteStudent(id)
+    this.fetchStudents()
   }
 
-  editStudent(student: any){
-    this.selectedStudent={...student};
+  addStudent(id:any,name:any, age:any){
+    this.studentService.addStudent(id, name, age)
+    this.fetchStudents()
   }
 
-  // updateStudent(){
-  //   const index= this.students.findIndex(student => student.id==this.selectedStudent)
-  //   console.log(index)
-  //   this.students[index]=this.selectedStudent
-  // }
-} 
+  editStudent(student:any){
+    this.studentService.editStudent(student)
+  }
+}

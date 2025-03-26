@@ -48,6 +48,50 @@
     </ng-container>
   </table>
 
+  <div *ngIf="selectedStudent">
+    <h2>Edit Student</h2>
+    <form>
+    <label>ID</label>
+    <input type="text" [(ngModel)] ="selectedStudent.id" name="id">
+
+    <label>Name</label>
+    <input type="text" [(ngModel)] ="selectedStudent.name" name="name">
+
+    <label>Branch</label>
+    <input type="text" [(ngModel)] ="selectedStudent.branch" name="branch">
+
+    <button type="button"(click)="updateStudent()">Update Student</button>
+    <button type="button"(click)="selectedStudent=null">Cancel</button>
+    </form>
+  </div>
 
 </body>
 </html>
+
+<!-- // -----
+  // newStudent: any;
+  // students:any;
+  // selectedStudent: any;
+
+  // constructor(private studentService: ApiStudentService){
+    
+  // }
+
+  // ngOnInit(){
+  //   this.fetchStudents()
+  // }
+  // fetchStudents(){
+  //   this.studentService.getStudents().subscribe(data=>{this.students=data})
+  // }
+
+  // deleteStudent(id:any){
+  //   console.log(id)
+  //   this.studentService.deleteStudent(id).subscribe(()=>{
+  //     this.fetchStudents()
+  //   })
+  // }
+
+  // addStudent(id:any,name:any,branch:any){
+  //   this.newStudent={"id":id.value, "name":name.value,"branch":branch.value}
+  // }
+ -->
